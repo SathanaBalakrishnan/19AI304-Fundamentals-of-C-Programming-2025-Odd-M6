@@ -8,7 +8,7 @@
 | Input | Output                                       |
 |-------|----------------------------------------------|
 | 1     | 101.25&nbsp;&nbsp;201.50&nbsp;&nbsp;301.75&nbsp;&nbsp;402.00&nbsp;&nbsp;502.75 |
-# Date : 
+
 # Aim:
 To develop a C program using the static storage class in a function with a parameter and without a return value to display the required output.
 # Algorithm:
@@ -33,7 +33,38 @@ To develop a C program using the static storage class in a function with a param
 ### Step 8:
   Stop
 # Program:
+
+```
+#include <stdio.h>
+
+void displayIncrement(float start) {
+	int i;
+    static float value;       
+    static int firstCall = 1; 
+    if (firstCall) {
+        value = start;        
+        firstCall = 0;
+    }
+    for (i = 0; i < 5; i++) {
+        printf("%.2f  ", value);
+        value += 100.25;      
+    }
+    printf("\n");
+}
+int main() {
+    float input;
+    printf("Enter starting number: ");
+    scanf("%f", &input);       
+    displayIncrement(input + 100.25);
+    return 0;
+}
+```
+
 # Output:
+
+<img width="508" height="287" alt="image" src="https://github.com/user-attachments/assets/873f24b4-e371-45c5-bbe9-8833c81c8804" />
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -42,7 +73,7 @@ Thus, the program was implemented and executed successfully, and the required ou
 # IAPR-6- Module 6 - FoC
 # Ex.No:27
   Implement a C program to perform arithmetic operations (addition, subtraction, multiplication, division) on two integers using function pointers. The user should input two numbers and select the desired operation from a menu.
-# Date : 
+ 
 # Aim:
   To implement a C program that uses function pointers to perform arithmetic operations (add, subtract, multiply, divide) on two integers based on user choice.
 # Algorithm:
@@ -79,7 +110,50 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11:
   Stop
 # Program:
+```
+#include <stdio.h>
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+int divide(int a, int b) {
+    if (b != 0)
+        return a / b;
+    else {
+        printf("Error: Division by zero!\n");
+        return 0; 
+    }
+}
+int main() {
+    int num1, num2, choice;
+    int (*operation)(int, int); 
+    printf("Enter two integers: ");
+    scanf("%d %d", &num1, &num2);
+    printf("\nSelect operation:\n");
+    printf("1. Addition\n");
+    printf("2. Subtraction\n");
+    printf("3. Multiplication\n");
+    printf("4. Division\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    switch (choice) {
+        case 1: operation = add; break;
+        case 2: operation = subtract; break;
+        case 3: operation = multiply; break;
+        case 4: operation = divide; break;
+        default:
+            printf("Invalid choice!\n");
+            return 1;
+    }
+    int result = operation(num1, num2);
+    printf("Result: %d\n", result);
+    return 0;
+}
+```
+
 # Output:
+
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
