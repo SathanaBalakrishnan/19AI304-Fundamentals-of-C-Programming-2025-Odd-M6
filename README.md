@@ -152,6 +152,7 @@ int main() {
 
 # Output:
 
+<img width="575" height="552" alt="image" src="https://github.com/user-attachments/assets/1e8f73cf-e101-4c54-85c5-c2bf721b285b" />
 
 
 # Result: 
@@ -161,7 +162,7 @@ Thus, the program was implemented and executed successfully, and the required ou
 # IAPR-6- Module 6 - FoC
 # Ex.No:28
   Develop a C program to store details of n employees (employee number, name, and salary) using structures, and display the employee(s) with the highest salary.
-# Date : 
+
 # Aim:
   To develop and implement a C program that uses a structure to store employee details (employee number, name, and salary) and determine the employee(s) with the highest salary.
 # Algorithm:
@@ -197,7 +198,49 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+
+```
+#include <stdio.h>
+#include <string.h>
+struct Employee {
+    int empNo;
+    char name[50];
+    float salary;
+};
+int main() {
+    int n,i;
+    printf("Enter number of employees: ");
+    scanf("%d", &n);
+    struct Employee emp[n]; 
+    for (i = 0; i < n; i++) {
+        printf("\nEnter details for employee %d:\n", i + 1);
+        printf("Employee Number: ");
+        scanf("%d", &emp[i].empNo);
+        printf("Name: ");
+        scanf(" %[^\n]", emp[i].name); 
+        printf("Salary: ");
+        scanf("%f", &emp[i].salary);
+    }
+    float maxSalary = emp[0].salary;
+    for (i = 1; i < n; i++) {
+        if (emp[i].salary > maxSalary)
+            maxSalary = emp[i].salary;
+    }
+    printf("\nEmployee(s) with the highest salary of %.2f:\n", maxSalary);
+    for (i = 0; i < n; i++) {
+        if (emp[i].salary == maxSalary) {
+            printf("Employee Number: %d, Name: %s, Salary: %.2f\n",
+                   emp[i].empNo, emp[i].name, emp[i].salary);
+        }
+    }
+    return 0;
+}
+```
 # Output:
+
+<img width="682" height="745" alt="image" src="https://github.com/user-attachments/assets/118a128a-54d9-4a3b-8d07-fb2b3680ec03" />
+
+ 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -206,7 +249,7 @@ Thus, the program was implemented and executed successfully, and the required ou
 # IAPR-6- Module 6 - FoC
 # Ex.No:29
   Create the C program to calculate the present age of a person by passing structure as a reference.
-# Date : 
+
 # Aim:
   To create a C program that uses a structure to store the current date and birth date, and to calculate the person’s present age in years, months, and days by passing the structure as a reference.
 # Algorithm:
@@ -240,7 +283,45 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9:
   Stop
 # Program:
+
+```
+#include <stdio.h>
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+void calculateAge(struct Date *dob, struct Date current) {
+    int ageYears, ageMonths, ageDays;
+    ageYears = current.year - dob->year;
+    ageMonths = current.month - dob->month;
+    ageDays = current.day - dob->day;
+    if (ageDays < 0) {
+        ageDays += 30; 
+        ageMonths--;
+    }
+    if (ageMonths < 0) {
+        ageMonths += 12;
+        ageYears--;
+    }
+    printf("Present Age: %d years, %d months, %d days\n", ageYears, ageMonths, ageDays);
+}
+int main() {
+    struct Date dob;
+    struct Date current;
+    printf("Enter your Date of Birth (DD MM YYYY): ");
+    scanf("%d %d %d", &dob.day, &dob.month, &dob.year);
+    printf("Enter current date (DD MM YYYY): ");
+    scanf("%d %d %d", &current.day, &current.month, &current.year);
+    calculateAge(&dob, current);
+    return 0;
+}
+```
 # Output:
+
+<img width="642" height="400" alt="image" src="https://github.com/user-attachments/assets/d0c0e098-e87d-437b-9a4c-6f49f3bed619" />
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -249,7 +330,7 @@ Thus, the program was implemented and executed successfully, and the required ou
 # IAPR-6- Module 6 - FoC
 # Ex.No:30
   Build a C program to demonstrate the use of a pointer to a union. Store an integer value in a union, access it using a union pointer, and display it as both an integer and a character.
-# Date : 
+
 # Aim:
   To build a program in C that uses a pointer to a union to store an integer value and display it in both integer and character format.
 # Algorithm:
@@ -276,7 +357,29 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+
+```
+#include <stdio.h>
+union Data {
+    int i;
+    char c;
+};
+int main() {
+    union Data d;
+    union Data *ptr; 
+    d.i = 65; 
+    ptr = &d;
+    printf("Accessing via union pointer:\n");
+    printf("As integer: %d\n", ptr->i);
+    printf("As character: %c\n", ptr->c);
+    return 0;
+}
+```
 # Output:
+
+<img width="557" height="392" alt="image" src="https://github.com/user-attachments/assets/2328846f-1467-4230-9de4-02650fadbaf5" />
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
